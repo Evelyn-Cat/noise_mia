@@ -2,7 +2,7 @@
 This scripts compute the privacy of distribution Laplace(0, b) where the scale parameter b is the noise parameter we sample from distributions.
 """
 import numpy as np
-from .noise_params import alphas, sensitivity, setted_delta
+from .noise_params import alphas, sensitivity
 
 ## When distributions are Gamma and Uniform, calculate the RDP.
 def compute_rdp_alpha(N, alpha, sensitivity):

@@ -4,13 +4,12 @@ This scripts compute the privacy of distribution Laplace(0, b) where the scale p
 import numpy as np
 from .noise_params import alphas, sensitivity
 
-## When distributions are Gamma, Exponential and Uniform, calculate the RDP.
+## When distributions are Exponential and Uniform, calculate the RDP.
 def compute_rdp_alpha(N, alpha, sensitivity):
     def compute_M(weight):
-        MGF_1 = ((1-N['a1']*weight*N['G_theta'])**(-N['G_k']))  # Gamma
         MGF_3 = (N['E_lambda']/(N['E_lambda']-N['a3']*weight))  # Exponential
         MGF_4 = ((np.exp(N['a4']*weight*N['U_b'])-np.exp(N['a4']*weight*N['U_a']))/(N['a4']*weight*(N['U_b']-N['U_a'])))  # Uniform
-        MGFs = MGF_1 * MGF_3 * MGF_4
+        MGFs = MGF_3 * MGF_4
         return MGFs
     
     MGF1 = compute_M(weight=alpha-1)
@@ -23,10 +22,9 @@ def compute_rdp_alpha(N, alpha, sensitivity):
 
 def compute_ma(N, alpha, sensitivity):
     def compute_M(weight):
-        MGF_1 = ((1-N['a1']*weight*N['G_theta'])**(-N['G_k']))  # Gamma
         MGF_3 = (N['E_lambda']/(N['E_lambda']-N['a3']*weight))  # Exponential
         MGF_4 = ((np.exp(N['a4']*weight*N['U_b'])-np.exp(N['a4']*weight*N['U_a']))/(N['a4']*weight*(N['U_b']-N['U_a'])))  # Uniform
-        MGFs = MGF_1 * MGF_3 * MGF_4
+        MGFs = MGF_3 * MGF_4
         return MGFs
     
     MGF1 = compute_M(weight=alpha*sensitivity)
