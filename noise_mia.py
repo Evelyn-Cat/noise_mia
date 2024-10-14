@@ -10,8 +10,9 @@ all_combinations = list(product(*expanded_items))
 print(all_combinations[1])
 
 def main(epsilon, sensitivity, alpha):
-    param_dict = {}
+    mias = []
     for combination in all_combinations:
+        param_dict = {}
         for i, key in enumerate(list(search_range.keys())):
             if isinstance(key, tuple):
                 for sub_key, sub_value in zip(key, combination[i]):
@@ -19,15 +20,13 @@ def main(epsilon, sensitivity, alpha):
             else:
                 param_dict[key] = combination[i]
         
-        rdp_Ns = []
         betas, beta_index, beta, mia = compute_mia(param_dict, sensitivity, epsilon=epsilon, alpha=alpha)
         if betas:
-            print(beta_index)
-        
-        print(param_dict)
-        print(rdp_Ns)
-        break
-
+            param_dict['mia'] = mia
+            mias.append(param_dict)
+    
+    sorted_mias = sorted(mias, key=lambda x: x['mia'])
+    return sorted_mias
 
 
 if __name__ == '__main__':
@@ -46,13 +45,15 @@ if __name__ == '__main__':
     # rdp_N_ = compute_rdp_order(N, order, sensitivity)
     # print(f"RDP of noise (order={order}, sensitivity={sensitivity}) = {rdp_N_}")
 
-    # import sys
-    # epsilon = sys.argv[1]
-    # sensitivity = sys.argv[2]
-    # print(epsilon, sensitivity)
-    epsilon = 3
-    sensitivity = 1
-    alpha = 0.2
-    main(epsilon, sensitivity, alpha)
-
+    import sys
+    epsilon = float(sys.argv[1])
+    sensitivity = float(sys.argv[2])
+    alpha = float(sys.argv[3])
+    print(epsilon, sensitivity, alpha)
+    # epsilon = 0.1
+    # sensitivity = 1
+    # alpha = 0.1
+    mias = main(epsilon, sensitivity, alpha)
+    for min_mia in mias:
+        print(min_mia)
 

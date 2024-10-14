@@ -26,25 +26,25 @@ def compute_ma(N, order, sensitivity):
         MGF_1 = ((1-N['a1']*weight*N['G_theta'])**(-N['G_k']))  # Gamma
         MGF_3 = (N['E_lambda']/(N['E_lambda']-N['a3']*weight))  # Exponential
         MGF_4 = ((np.exp(N['a4']*weight*N['U_b'])-np.exp(N['a4']*weight*N['U_a']))/(N['a4']*weight*(N['U_b']-N['U_a'])))  # Uniform
-        print(f"MGF_1:{MGF_1}")
-        print(f"MGF_3:{MGF_3}")
-        print(f"MGF_4:{MGF_4}")
+        # print(f"MGF_1:{MGF_1}")
+        # print(f"MGF_3:{MGF_3}")
+        # print(f"MGF_4:{MGF_4}")
         MGFs = MGF_1 * MGF_3 * MGF_4
         return MGFs
     
     MGF1 = compute_M(weight=order*sensitivity)
     MGF2 = compute_M(weight=-(order+1)*sensitivity)
-    print(f"mgf1:{MGF1} order:{order} sen:{sensitivity}")
-    print(f"mgf2:{MGF2} order:{order} sen:{sensitivity}")
+    # print(f"mgf1:{MGF1} order:{order} sen:{sensitivity}")
+    # print(f"mgf2:{MGF2} order:{order} sen:{sensitivity}")
     
     i01 = ((order+1)/(2*order+1)) * MGF1
     i02 = (order/(2*order+1)) * MGF2
-    print(f"i01:{i01}")
-    print(f"i02:{i02}")
+    # print(f"i01:{i01}")
+    # print(f"i02:{i02}")
     i1 = ((order+1)/(2*order+1)) * MGF1 + (order/(2*order+1)) * MGF2
-    print(f"i1:{i1}")
+    # print(f"i1:{i1}")
     ma_N = np.log(((order+1)/(2*order+1)) * MGF1 + (order/(2*order+1)) * MGF2)
-    print(f"ma_N:{ma_N}")
+    # print(f"ma_N:{ma_N}")
     return ma_N
 
 
@@ -52,28 +52,28 @@ def compute_mia(N, sensitivity, epsilon, alpha):
     betas = {}
     for order in orders:
         try:
-            print(f"order: {order} sensitivity: {sensitivity}")
+            # print(f"order: {order} sensitivity: {sensitivity}")
             ma = compute_ma(N, order, sensitivity)
-            print(f"ma:{ma}")
+            # print(f"ma:{ma}")
             delta = np.exp(compute_ma(N, order, sensitivity) - order * epsilon)
-            print(f"delta:{delta}")
+            # print(f"delta:{delta}")
             beta1 = 1 - delta - np.exp(epsilon) * alpha
             beta2 = np.exp(-epsilon) * (1 - delta - alpha)
-            print(f"beta1:{beta1}")
-            print(f"beta2:{beta2}")
-            print("\n")
+            # print(f"beta1:{beta1}")
+            # print(f"beta2:{beta2}")
+            # print("\n")
             if not np.isnan(beta1) and not np.isnan(beta2):
                 betas[order] = np.max([0, beta1, beta2])
         except:
             continue
     
-    print(f"betas:{betas}")
+    # print(f"betas:{betas}")
     if betas:
-        beta_index = np.max(betas, key=betas.get)
+        beta_index = max(betas, key=betas.get)
         beta = betas[beta_index]
-        print(f"beta:{beta}")
+        # print(f"beta:{beta}")
         mia = 1 - 2 * beta
-        print(f"mia:{mia}")
+        # print(f"mia:{mia}")
         return betas, beta_index, beta, mia
     else:
         return [], [], [], []
