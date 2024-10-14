@@ -1,7 +1,7 @@
 import numpy as np
 from itertools import product
 from noise.noise_privacy import compute_rdp_alpha, compute_mia
-from noise.noise_params import alphas, sensitivity, distributions, search_range
+from noise.noise_params import alphas, distributions, search_range
 
 expanded_items = []
 for key, values in search_range.items():
@@ -9,7 +9,7 @@ for key, values in search_range.items():
 all_combinations = list(product(*expanded_items))
 print(all_combinations[1])
 
-def main(epsilon):
+def main(epsilon, sensitivity):
     param_dict = {}
     for combination in all_combinations:
         for i, key in enumerate(list(search_range.keys())):
@@ -48,6 +48,7 @@ if __name__ == '__main__':
 
     import sys
     epsilon = sys.argv[1]
-    print(epsilon)
-    main(epsilon)
+    sensitivity = sys.argv[2]
+    print(epsilon, sensitivity)
+    main(epsilon, sensitivity)
 
