@@ -9,7 +9,7 @@ for key, values in search_range.items():
 all_combinations = list(product(*expanded_items))
 print(all_combinations[1])
 
-def main(epsilon, sensitivity):
+def main(epsilon):
     param_dict = {}
     for combination in all_combinations:
         for i, key in enumerate(list(search_range.keys())):
@@ -48,7 +48,6 @@ if __name__ == '__main__':
 
     import sys
     epsilon = sys.argv[1]
-    sensitivity = sys.argv[2]
-    print(epsilon, sensitivity)
-    main(epsilon, sensitivity)
+    print(epsilon)
+    main(epsilon)
 
