@@ -45,13 +45,14 @@ if __name__ == '__main__':
     # rdp_N_ = compute_rdp_order(N, order, sensitivity)
     # print(f"RDP of noise (order={order}, sensitivity={sensitivity}) = {rdp_N_}")
 
-    # import sys
-    # epsilon = sys.argv[1]
-    # sensitivity = sys.argv[2]
-    # print(epsilon, sensitivity)
-    epsilon = 3
-    sensitivity = 1
-    alpha = 0.2
+    import sys
+    epsilon = float(sys.argv[1])
+    sensitivity = float(sys.argv[2])
+    alpha = float(sys.argv[3])
+    print(epsilon, sensitivity, alpha)
+    # epsilon = 0.1
+    # sensitivity = 1
+    # alpha = 0.1
     mias = main(epsilon, sensitivity, alpha)
     for min_mia in mias:
         print(min_mia)
