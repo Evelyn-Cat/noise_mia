@@ -11,7 +11,6 @@ noise_params = {
     0.3: {
         "G_k": 1.5,
         "G_theta": 0.1,
-        "E_lambda": 0.5,
         "U_a": 0,
         "U_b": 1,
         "a1": 1,

@@ -1,7 +1,7 @@
 import numpy as np
 from itertools import product
-from noise_mia.noise.noise_privacy_14 import compute_rdp_alpha, compute_mia
-from noise_mia.noise.noise_params_14 import alphas, distributions, search_range
+from noise.noise_privacy_14 import compute_rdp_alpha, compute_mia
+from noise.noise_params_14 import alphas, distributions, search_range
 
 expanded_items = []
 for key, values in search_range.items():
@@ -19,14 +19,12 @@ def main(epsilon, sensitivity):
             else:
                 param_dict[key] = combination[i]
         
-        rdp_Ns = []
         betas, beta_index, beta, mia = compute_mia(param_dict, sensitivity, epsilon=epsilon)
         if betas:
             print(beta_index)
         
         print(param_dict)
-        print(rdp_Ns)
-        
+        break
 
 
 
@@ -46,10 +44,12 @@ if __name__ == '__main__':
     # rdp_N_ = compute_rdp_alpha(N, alpha, sensitivity)
     # print(f"RDP of noise (alpha={alpha}, sensitivity={sensitivity}) = {rdp_N_}")
 
-    import sys
-    epsilon = sys.argv[1]
-    sensitivity = sys.argv[2]
-    print(epsilon, sensitivity)
+    # import sys
+    # epsilon = sys.argv[1]
+    # sensitivity = sys.argv[2]
+    # print(epsilon, sensitivity)
+    epsilon = 3
+    sensitivity = 1
     main(epsilon, sensitivity)
 
 

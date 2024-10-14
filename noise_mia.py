@@ -26,7 +26,7 @@ def main(epsilon, sensitivity):
         
         print(param_dict)
         print(rdp_Ns)
-        
+        break
 
 
 
@@ -46,10 +46,12 @@ if __name__ == '__main__':
     # rdp_N_ = compute_rdp_alpha(N, alpha, sensitivity)
     # print(f"RDP of noise (alpha={alpha}, sensitivity={sensitivity}) = {rdp_N_}")
 
-    import sys
-    epsilon = sys.argv[1]
-    sensitivity = sys.argv[2]
-    print(epsilon, sensitivity)
+    # import sys
+    # epsilon = sys.argv[1]
+    # sensitivity = sys.argv[2]
+    # print(epsilon, sensitivity)
+    epsilon = 3
+    sensitivity = 1
     main(epsilon, sensitivity)
 
 
