@@ -3,7 +3,7 @@ import numpy as np
 sensitivity = 1
 
 max_order = 128
-alphas = range(2, max_order + 1)
+orders = range(2, max_order + 1)
 
 distributions = ["Gamma", "Uniform"]
 

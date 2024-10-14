@@ -1,7 +1,7 @@
 import numpy as np
 from itertools import product
-from noise.noise_privacy_14 import compute_rdp_alpha, compute_mia
-from noise.noise_params_14 import alphas, distributions, search_range
+from noise.noise_privacy_14 import compute_rdp_order, compute_mia
+from noise.noise_params_14 import orders, distributions, search_range
 
 expanded_items = []
 for key, values in search_range.items():
@@ -9,9 +9,10 @@ for key, values in search_range.items():
 all_combinations = list(product(*expanded_items))
 print(all_combinations[1])
 
-def main(epsilon, sensitivity):
-    param_dict = {}
+def main(epsilon, sensitivity, alpha):
+    mias = []
     for combination in all_combinations:
+        param_dict = {}
         for i, key in enumerate(list(search_range.keys())):
             if isinstance(key, tuple):
                 for sub_key, sub_value in zip(key, combination[i]):
@@ -19,13 +20,13 @@ def main(epsilon, sensitivity):
             else:
                 param_dict[key] = combination[i]
         
-        betas, beta_index, beta, mia = compute_mia(param_dict, sensitivity, epsilon=epsilon)
+        betas, beta_index, beta, mia = compute_mia(param_dict, sensitivity, epsilon=epsilon, alpha=alpha)
         if betas:
-            print(beta_index)
-        
-        print(param_dict)
-        break
-
+            param_dict['mia'] = mia
+            mias.append(param_dict)
+    
+    sorted_mias = sorted(mias, key=lambda x: x['mia'])
+    return sorted_mias
 
 
 if __name__ == '__main__':
@@ -39,10 +40,10 @@ if __name__ == '__main__':
     #     "a3": 0.5,
     #     "a4": 0.1
     # }
-    # alpha = 0.3
+    # order = 0.3
     # sensitivity = 1
-    # rdp_N_ = compute_rdp_alpha(N, alpha, sensitivity)
-    # print(f"RDP of noise (alpha={alpha}, sensitivity={sensitivity}) = {rdp_N_}")
+    # rdp_N_ = compute_rdp_order(N, order, sensitivity)
+    # print(f"RDP of noise (order={order}, sensitivity={sensitivity}) = {rdp_N_}")
 
     # import sys
     # epsilon = sys.argv[1]
@@ -50,6 +51,8 @@ if __name__ == '__main__':
     # print(epsilon, sensitivity)
     epsilon = 3
     sensitivity = 1
-    main(epsilon, sensitivity)
-
+    alpha = 0.2
+    mias = main(epsilon, sensitivity, alpha)
+    for min_mia in mias:
+        print(min_mia)
 
