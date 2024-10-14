@@ -1,7 +1,7 @@
 import numpy as np
 from itertools import product
-from noise.noise_privacy_2 import compute_rdp_alpha, compute_mia
-from noise.noise_params_2 import alphas, distributions, search_range
+from noise_mia.noise.noise_privacy_34 import compute_rdp_alpha, compute_mia
+from noise_mia.noise.noise_params_34 import alphas, distributions, search_range
 
 expanded_items = []
 for key, values in search_range.items():
