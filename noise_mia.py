@@ -11,7 +11,8 @@ all_combinations = list(product(*expanded_items))
 print(all_combinations[1])
 
 def main(sensitivity, alpha):
-    df = pd.DataFrame([])
+    cnt = 0
+    f = open(f"results/sen_{sensitivity}_alpha_{alpha}.txt", "w", encoding="utf-8")
     for combination in all_combinations:
         param_dict = {}
         for i, key in enumerate(list(search_range.keys())):
@@ -25,11 +26,14 @@ def main(sensitivity, alpha):
         objective = param_dict["G_k"] * param_dict["G_theta"] + (param_dict['U_a'] + param_dict['U_b'])/2 + 1/param_dict['E_lambda']
         
         if betas:
+            print(combination)
+            if cnt == 0:
+                f.write("\t".join(list(param_dict.keys())) + '\n')
+                cnt = cnt + 1
             param_dict['mia'] = mia
             param_dict['obj'] = objective
-            df = df.append(param_dict, ignore_index=True)
-    
-    return df
+            f.write("\t".join(map(str, param_dict.values())) + '\n')
+    f.close()
 
 
 if __name__ == '__main__':
@@ -51,6 +55,5 @@ if __name__ == '__main__':
     import sys
     sensitivity = float(sys.argv[1])
     alpha = float(sys.argv[2])
-    df = main(sensitivity, alpha)
-    df.to_csv(f"results/sen_{sensitivity}_alpha_{alpha}.csv")
+    main(sensitivity, alpha)
 
