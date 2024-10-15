@@ -10,14 +10,8 @@ for key, values in search_range.items():
 all_combinations = list(product(*expanded_items))
 print(all_combinations[1])
 
-<<<<<<< HEAD
 def main(sensitivity, alpha):
     df = pd.DataFrame([])
-=======
-def main(epsilon, sensitivity, alpha):
-    mias = []
-    objs = []
->>>>>>> origin/main
     for combination in all_combinations:
         param_dict = {}
         for i, key in enumerate(list(search_range.keys())):
@@ -27,21 +21,13 @@ def main(epsilon, sensitivity, alpha):
             else:
                 param_dict[key] = combination[i]
         
-<<<<<<< HEAD
         betas, beta_index, beta, mia = compute_mia(param_dict, sensitivity, param_dict['epsilon'], alpha=alpha)
-=======
-        betas, beta_index, beta, mia = compute_mia(param_dict, sensitivity, epsilon=epsilon, alpha=alpha)
->>>>>>> origin/main
         objective = param_dict["G_k"] * param_dict["G_theta"] + (param_dict['U_a'] + param_dict['U_b'])/2 + 1/param_dict['E_lambda']
         
         if betas:
             param_dict['mia'] = mia
             param_dict['obj'] = objective
-<<<<<<< HEAD
             df = df.append(param_dict, ignore_index=True)
-=======
-            mias.append(param_dict)
->>>>>>> origin/main
     
     return df
 
