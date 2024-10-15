@@ -42,7 +42,7 @@ if __name__ == '__main__':
     
     print(f"import args.{noise_type}.{dataset}_{model}")
     if run_if:
-        psize = 8 if "cv" in exp_type else 1
+        psize = 16 if "cv" in exp_type else 1
         pool = mp.Pool(processes=psize)
         if "cv" in exp_type:
             print('exp_run')

@@ -11,6 +11,7 @@ print(all_combinations[1])
 
 def main(epsilon, sensitivity, alpha):
     mias = []
+    objs = []
     for combination in all_combinations:
         param_dict = {}
         for i, key in enumerate(list(search_range.keys())):
@@ -21,8 +22,11 @@ def main(epsilon, sensitivity, alpha):
                 param_dict[key] = combination[i]
         
         betas, beta_index, beta, mia = compute_mia(param_dict, sensitivity, epsilon=epsilon, alpha=alpha)
+        objective = param_dict["G_k"] * param_dict["G_theta"] + (param_dict['U_a'] + param_dict['U_b'])/2 + 1/param_dict['E_lambda']
+        
         if betas:
             param_dict['mia'] = mia
+            param_dict['obj'] = objective
             mias.append(param_dict)
     
     sorted_mias = sorted(mias, key=lambda x: x['mia'])

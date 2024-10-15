@@ -6,4 +6,4 @@ args = {   "clip_norm": [1],
     "noise_type": "lmo",
     "pois_ct": [1],
     "save_dir": "../../save_results/auditing/cv/fmnist_lr/",
-    "trials": (0, 1)}
+    "trials": (0, 500)}
