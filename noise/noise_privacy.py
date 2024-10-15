@@ -72,7 +72,7 @@ def compute_mia(N, sensitivity, epsilon, alpha):
         beta_index = max(betas, key=betas.get)
         beta = betas[beta_index]
         # print(f"beta:{beta}")
-        mia = 1 - 2 * beta
+        mia = 1 - alpha - beta
         # print(f"mia:{mia}")
         return betas, beta_index, beta, mia
     else:

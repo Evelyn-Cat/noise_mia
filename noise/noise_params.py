@@ -27,4 +27,5 @@ search_range = {
     ("G_theta", "G_k"): [(1,2), (2,2), (3,2), (5,1), (9,0.5), (7.5,1), (0.5,1)],  # k>0; theta>0; t<1/theta
     "E_lambda": [0.1, 0.5, 1, 5],  # E_lambda>0; t<E_lambda;
     ("U_b", "U_a"): [(1,0), (2,1)],  # b>a; when t=0: MGF=1;
+    "epsilon": np.linspace(0.01, 3, 31),
 }
