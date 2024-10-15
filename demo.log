@@ -1,14 +1,36 @@
+Condition: MIA<0.3
 eps=0.1
 sen=0.1
 alpha=0.1
-params={'a1': 0.8, 'a4': 0.2, 'G_theta': 0.5, 'G_k': 1, 'U_b': 1, 'U_a': 0, 'mia': 0.0007976317737714567}
 
-eps=0.1
-sen=0.1
-alpha=0.2
-{'a1': 0.3, 'a4': 0.4, 'G_theta': 0.5, 'G_k': 1, 'U_b': 2, 'U_a': 1, 'mia': 0.009686605458672504}
+Searched params:
+params={'a1': 0.7, 'a3': 0.2, 'a4': 0.3, 'G_theta': 0.5, 'G_k': 1, 'E_lambda': 5, 'U_b': 2, 'U_a': 1, 'mia': 0.2986591741451383}
+beta=0.35067041292743084
+delta = 0.5388124952650044
 
-eps=0.1
-sen=0.1
+auditing on CV: fmnist lr
+pois_ct: 1, clip norm: 1, epslb: 0.03294058968877416, p0: 0.6128747429324738, p1: 0.3171417347570954
+
+
+
+Condition: K = MIA<0.5
 alpha=0.3
-{'a1': 0.5, 'a3': 0.2, 'a4': 0.6, 'G_theta': 3, 'G_k': 2, 'E_lambda': 0.5, 'U_b': 1, 'U_a': 0, 'mia': 0.0005255673419636286}
+sen=1
+
+eps=1
+
+T okk
+
+Searched params:
+params={'a1': 0.8, 'a3': 0.2, 'a4': 0.3, 'G_theta': 1, 'G_k': 2, 'E_lambda': 1, 'U_b': 1, 'U_a': 0, 'mia': 0.49998416583736915, 'acc': }
+
+beta=0.2500079170813154
+delta=0.020408022026964623
+epsilon==??
+
+
+auditing on CV: fmnist lr
+pois_ct: 1, clip norm: 1, epslb: 0.03294058968877416, p0: 0.6128747429324738, p1: 0.3171417347570954
+
+gaussian
+
