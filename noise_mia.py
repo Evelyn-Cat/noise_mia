@@ -28,7 +28,7 @@ def main(sensitivity, alpha):
         if betas:
             print(combination)
             if cnt == 0:
-                f.write("\t".join(list(param_dict.keys())) + '\n')
+                f.write("\t".join(list(param_dict.keys()) + ['mia', 'obj']) + '\n')
                 cnt = cnt + 1
             param_dict['mia'] = mia
             param_dict['obj'] = objective
