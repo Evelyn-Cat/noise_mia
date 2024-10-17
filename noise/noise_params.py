@@ -1,6 +1,8 @@
 import numpy as np
 
 sensitivity = 1
+alpha = 0.05
+K = 0.2
 
 max_order = 128
 orders = range(2, max_order + 1)
