@@ -23,16 +23,17 @@ def main(sensitivity, alpha, filename=None):
             else:
                 param_dict[key] = combination[i]
         
-        betas, beta_index, beta, mia = compute_mia(param_dict, sensitivity, param_dict['epsilon'], alpha=alpha)
+        betas, beta_index, beta, mia, delta = compute_mia(param_dict, sensitivity, param_dict['epsilon'], alpha=alpha)
         objective = param_dict["G_k"] * param_dict["G_theta"] + (param_dict['U_a'] + param_dict['U_b'])/2 + 1/param_dict['E_lambda']
         
         if betas:
             print(combination)
             if cnt == 0:
-                f.write("\t".join(list(param_dict.keys()) + ['mia', 'obj']) + '\n')
+                f.write("\t".join(list(param_dict.keys()) + ['mia', 'obj', 'delta']) + '\n')
                 cnt = cnt + 1
             param_dict['mia'] = mia
             param_dict['obj'] = objective
+            param_dict['delta'] = delta
             f.write("\t".join(map(str, param_dict.values())) + '\n')
     f.close()
 
