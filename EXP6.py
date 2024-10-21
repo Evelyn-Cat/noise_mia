@@ -2,7 +2,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from noise.noise_params import distributions, orders
-from noise.noise_generation import compute_rdp_order
+from noise.noise_privacy import compute_rdp_order
 from noise.rdp_accounting import get_privacy_spent
 
 # EXP5: vary T
@@ -15,14 +15,15 @@ sensitivity=1.0
 Ts=[5, 10, 20, 50, 100]
 
 
-delta = compute_delta(param)
-for T in Ts:
+# delta = compute_delta(param)
+delta=1e-10
+for T in [1]:
     rdp_Ns = []
     for order in orders:
         rdp_N = compute_rdp_order(param, order, sensitivity)
         rdp_Ns.append(rdp_N * T)
     eps, order = get_privacy_spent(orders=orders, rdp=rdp_Ns, delta=delta)
-
+    print(eps)
     
 
 

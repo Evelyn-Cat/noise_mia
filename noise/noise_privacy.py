@@ -21,8 +21,8 @@ def compute_rdp_order(N, order, sensitivity):
     return rdp_N
 
 
-def compute_ma(N, order, sensitivity):
-    def compute_M(weight):
+def compute_ma(N, order, sensitivity, T=1):
+    def compute_M(weight, T=1):
         MGF_1 = ((1-N['a1']*weight*N['G_theta'])**(-N['G_k']))  # Gamma
         MGF_3 = (N['E_lambda']/(N['E_lambda']-N['a3']*weight))  # Exponential
         MGF_4 = ((np.exp(N['a4']*weight*N['U_b'])-np.exp(N['a4']*weight*N['U_a']))/(N['a4']*weight*(N['U_b']-N['U_a'])))  # Uniform
@@ -30,10 +30,11 @@ def compute_ma(N, order, sensitivity):
         # print(f"MGF_3:{MGF_3}")
         # print(f"MGF_4:{MGF_4}")
         MGFs = MGF_1 * MGF_3 * MGF_4
+        MGFs = MGFs ** T
         return MGFs
     
-    MGF1 = compute_M(weight=order*sensitivity)
-    MGF2 = compute_M(weight=-(order+1)*sensitivity)
+    MGF1 = compute_M(weight=order*sensitivity, T=T)
+    MGF2 = compute_M(weight=-(order+1)*sensitivity, T=T)
     # print(f"mgf1:{MGF1} order:{order} sen:{sensitivity}")
     # print(f"mgf2:{MGF2} order:{order} sen:{sensitivity}")
     
@@ -41,9 +42,10 @@ def compute_ma(N, order, sensitivity):
     i02 = (order/(2*order+1)) * MGF2
     # print(f"i01:{i01}")
     # print(f"i02:{i02}")
-    i1 = ((order+1)/(2*order+1)) * MGF1 + (order/(2*order+1)) * MGF2
+    i1 = ((order+1) * MGF1 + order * MGF2)/(2*order+1)
     # print(f"i1:{i1}")
-    ma_N = np.log(((order+1)/(2*order+1)) * MGF1 + (order/(2*order+1)) * MGF2)
+    # ma_N = np.log(((order+1)/(2*order+1)) * MGF1 + (order/(2*order+1)) * MGF2)
+    ma_N = np.log(i1)
     # print(f"ma_N:{ma_N}")
     return ma_N
 

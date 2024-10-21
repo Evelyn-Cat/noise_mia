@@ -10,9 +10,9 @@ for key, values in search_range.items():
 all_combinations = list(product(*expanded_items))
 print(all_combinations[1])
 
-def main(sensitivity, alpha, filename=None):
+def main(sensitivity, alpha, T=1, filename=None):
     cnt = 0
-    filename = f"results/sen_{sensitivity}_alpha_{alpha}.txt" if filename==None else filename
+    filename = f"results/sen_{sensitivity}_alpha_{alpha}_T_{T}.txt" if filename==None else filename
     f = open(filename, "w", encoding="utf-8")
     for combination in all_combinations:
         param_dict = {}
