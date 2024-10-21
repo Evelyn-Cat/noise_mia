@@ -57,5 +57,7 @@ if __name__ == '__main__':
     import sys
     sensitivity = float(sys.argv[1])
     alpha = float(sys.argv[2])
-    main(sensitivity, alpha)
+    T = int(sys.argv[3])
+    # print(sensitivity, alpha, T)
+    main(sensitivity, alpha, T)
 
