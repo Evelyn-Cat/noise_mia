@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from noise.noise_params import distributions
 
-# EXP4: the optimal noise visualizaiton.
+# EXP4: the optimal noise visualization.
 from noise.noise_generation import generate_noise
 noise_size=1000
 noise_generations = [[], []]

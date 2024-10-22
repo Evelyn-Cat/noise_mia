@@ -13,11 +13,14 @@ def compute_rdp_order(N, order, sensitivity):
         MGFs = MGF_1 * MGF_3 * MGF_4
         return MGFs
     
-    MGF1 = compute_M(weight=order-1)
-    MGF2 = compute_M(weight=1-sensitivity-order)
-    MGF3 = compute_M(weight=(1-2*sensitivity)*order+(sensitivity-1))
+    try:
+        MGF1 = compute_M(weight=order-1)
+        MGF2 = compute_M(weight=1-sensitivity-order)
+        MGF3 = compute_M(weight=(1-2*sensitivity)*order+(sensitivity-1))
     
-    rdp_N = (1/(order-1)) * np.log((order/(2*order-1)) * MGF1 + (1/2) * MGF2 + (1/(2*(1-2*order))) * MGF3)
+        rdp_N = (1/(order-1)) * np.log((order/(2*order-1)) * MGF1 + (1/2) * MGF2 + (1/(2*(1-2*order))) * MGF3)
+    except:
+        return []
     return rdp_N
 
 
