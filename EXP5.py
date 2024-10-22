@@ -2,9 +2,9 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from noise.parser import parser_file
-from noise.noise_privacy import compute_obj_Gaussian
+from noise.plrv import compute_obj_Gaussian
 from noise.noise_params import distributions, orders
-from noise.noise_generation import compute_rdp_order
+from noise.noise_privacy import compute_rdp_order
 from noise.rdp_accounting import get_privacy_spent
 
 
