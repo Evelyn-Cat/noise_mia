@@ -11,7 +11,8 @@ sensitivities = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
 
 df = pd.DataFrame([])
 for sensitivity in sensitivities:
-    header, content = parser_file(f"results/sen_{sensitivity}_alpha_{alpha}.txt")
+    # header, content = parser_file(f"results/sen_{sensitivity}_alpha_{alpha}.txt")
+    header, content = parser_file(f"results/14.sen_{sensitivity}_alpha_{alpha}_T_1.txt")
     dict_params = dict(zip(header, content))
     result_list = [{k: v for k, v in zip(header, values)} for values in content]
     result_list = pd.DataFrame(result_list)
@@ -87,5 +88,5 @@ plt.xlabel('Epsilon')
 plt.ylabel('Accuracy (mean of epsilon)')
 plt.grid()
 plt.legend()
-plt.savefig("results/sen=1k=0.4.png")
+plt.savefig("results/14.sen=1k=0.4.png")
 

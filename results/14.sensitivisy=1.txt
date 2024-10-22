@@ -1,0 +1,14 @@
+K: 0.1 params: {'a1': 0.1, 'a4': 0.1, 'G_theta': 3.0, 'G_k': 2.0, 'U_b': 2.0, 'U_a': 1.0, 'epsilon': 2.402, 'mia': 0.00226, 'obj': 7.5, 'delta': 0.0, 'sensitivity': 1.0}
+K: 0.1 sigma: 0.49256859462010105
+
+
+K: 0.2 params: {'a1': 0.1, 'a4': 0.1, 'G_theta': 3.0, 'G_k': 2.0, 'U_b': 2.0, 'U_a': 1.0, 'epsilon': 2.402, 'mia': 0.00226, 'obj': 7.5, 'delta': 0.0, 'sensitivity': 1.0}
+K: 0.2 sigma: 0.43115651173214836
+
+
+K: 0.3 params: {'a1': 0.1, 'a4': 0.1, 'G_theta': 3.0, 'G_k': 2.0, 'U_b': 2.0, 'U_a': 1.0, 'epsilon': 2.402, 'mia': 0.00226, 'obj': 7.5, 'delta': 0.0, 'sensitivity': 1.0}
+K: 0.3 sigma: 0.3729552240646576
+
+
+K: 0.4 params: {'a1': 0.1, 'a4': 0.1, 'G_theta': 3.0, 'G_k': 2.0, 'U_b': 2.0, 'U_a': 1.0, 'epsilon': 2.402, 'mia': 0.00226, 'obj': 7.5, 'delta': 0.0, 'sensitivity': 1.0}
+K: 0.4 sigma: 0.30397841595588454

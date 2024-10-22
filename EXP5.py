@@ -47,5 +47,5 @@ plt.xlabel('MIA threshold')
 plt.ylabel('Accuracy (mean of epsilon)')
 plt.grid()
 plt.legend()
-plt.savefig("results/sen=1k=0.4varyT.png")
+plt.savefig("results/14.sen=1k=0.4varyT.png")
 
