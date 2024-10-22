@@ -9,9 +9,9 @@ conda activate tf_env
 python main1.py gaussian fmnist lr ok
 python main1.py lmo fmnist lr ok
 python main2.py fmnist lr ok
-python main3.py gaussian fmnist lr 30
+python main3.py gaussian p100 lr 30
 python main3.py lmo fmnist lr 30
-python main5.py fmnist lr ok
+python main5.py p100 lr ok
 python main6.py gaussian fmnist lr 30
 python main6.py lmo fmnist lr 30
 # 3 run code for NLP datasets.

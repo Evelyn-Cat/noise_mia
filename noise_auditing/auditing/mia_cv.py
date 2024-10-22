@@ -57,6 +57,8 @@ def main(_):
             exit(0)
     
     exp_type, data_dir, dataset, model, _, _, _, noise_type, save_dir, _, _ = init(noise_type, dataset, model)
+    data_dir = "datasets"
+
     res_dir = os.path.join(save_dir, "mia.results")
     os.makedirs(res_dir, exist_ok=True)
     
@@ -81,13 +83,14 @@ def main(_):
         all_bkds["tst"] = all_bkds["tst"][0].reshape((-1, 28, 28, 1)), np.eye(2)[all_bkds["tst"][1]]
         all_bkds["trn"] = all_bkds["trn"][0].reshape((-1, 28, 28, 1)), np.eye(2)[all_bkds["trn"][1]]
     elif "p100" in dataset:
-        loader = np.load(os.path.join(data_dir, "/p100/p100_1.npy"), allow_pickle=True)
+        loader = np.load(os.path.join(data_dir, "p100/p100_1.npy"), allow_pickle=True)
         all_bkds = {"tst": loader[3],"trn": loader[0]}
-        all_bkds["tst"] = all_bkds["tst"][0].reshape((-1, 28, 28, 1)), np.eye(2)[all_bkds["tst"][1]]
-        all_bkds["trn"] = all_bkds["trn"][0].reshape((-1, 28, 28, 1)), np.eye(2)[all_bkds["trn"][1]]
-    
+        all_bkds["tst"] = all_bkds["tst"][0].reshape((-1, 100)), np.eye(100)[all_bkds["tst"][1]]
+        all_bkds["trn"] = all_bkds["trn"][0].reshape((-1, 100)), np.eye(100)[all_bkds["trn"][1]]
+
     alls = []
     # auditing = auditor()
+    pre = 0
     for h5 in cfg_map[cfg_key][int(start):int(end)]:
         # x, y = all_bkds['p']
         trn_x, trn_y = all_bkds['trn']
@@ -112,8 +115,12 @@ def main(_):
             tst_thresh = tst_y_len - (tst_preds >= trn_loss_mean).sum()
             acc = (trn_thresh + tst_thresh) / tst_y_len
             return np.log(acc)
-        
-        nob_vals = mia(save_dir, h5, trn_x, trn_y, tst_x, tst_y)
+        try:
+            nob_vals = mia(save_dir, h5, trn_x, trn_y, tst_x, tst_y)
+            pre = nob_vals
+        except:
+            nob_vals = pre
+            print(f"something wrong with {h5}")
         alls.append(nob_vals)
     
     if alls == []:
