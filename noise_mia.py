@@ -26,7 +26,7 @@ def main(sensitivity, alpha, T=1, filename=None):
         betas, beta_index, beta, mia, delta = compute_mia(param_dict, sensitivity, param_dict['epsilon'], alpha=alpha)
         objective = param_dict["G_k"] * param_dict["G_theta"] + (param_dict['U_a'] + param_dict['U_b'])/2 + 1/param_dict['E_lambda']
         
-        if betas:
+        if betas and delta<1:
             print(combination)
             if cnt == 0:
                 f.write("\t".join(list(param_dict.keys()) + ['mia', 'obj', 'delta']) + '\n')
