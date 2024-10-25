@@ -8,7 +8,7 @@ from noise.noise_privacy import compute_rdp_order
 from noise.rdp_accounting import get_privacy_spent
 
 
-alpha=0.05
+alpha=0.2
 sensitivity=1.0
 Ts=[1, 5, 10, 20, 50, 100]
 
@@ -26,7 +26,7 @@ for T in Ts:
 
 
 # EXP5: vary T
-K=0.4
+K=0.2
 
 acc = [[], []]
 for T in Ts:
@@ -47,5 +47,5 @@ plt.xlabel('MIA threshold')
 plt.ylabel('Accuracy (mean of epsilon)')
 plt.grid()
 plt.legend()
-plt.savefig("results/14.sen=1k=0.4varyT.png")
+plt.savefig("results/exp5.alpha=0.2.sen=1k=0.2varyT.png")
 

@@ -1,0 +1,44 @@
+epsilon: 0.1 params: {'a1': 0.1, 'a3': 0.1, 'a4': 0.1, 'G_theta': 7.5, 'G_k': 1.0, 'E_lambda': 0.1, 'U_b': 1.0, 'U_a': 0.0, 'epsilon': 0.01, 'mia': 0.00271, 'obj': 18.0, 'delta': 0.32733, 'sensitivity': 1.0}
+epsilon: 0.1 sigma: 0.48242367051124024
+
+
+epsilon: 0.2 params: {'a1': 0.1, 'a3': 0.1, 'a4': 0.1, 'G_theta': 7.5, 'G_k': 1.0, 'E_lambda': 0.1, 'U_b': 2.0, 'U_a': 1.0, 'epsilon': 0.10967, 'mia': 0.01061, 'obj': 19.0, 'delta': 0.3416, 'sensitivity': 1.0}
+epsilon: 0.2 sigma: 0.48242367051124024
+
+
+epsilon: 0.3 params: {'a1': 0.1, 'a3': 0.1, 'a4': 0.1, 'G_theta': 7.5, 'G_k': 1.0, 'E_lambda': 0.1, 'U_b': 2.0, 'U_a': 1.0, 'epsilon': 0.10967, 'mia': 0.01061, 'obj': 19.0, 'delta': 0.3416, 'sensitivity': 1.0}
+epsilon: 0.3 sigma: 0.48242367051124024
+
+
+epsilon: 0.4 params: {'a1': 0.1, 'a3': 0.1, 'a4': 0.1, 'G_theta': 7.5, 'G_k': 1.0, 'E_lambda': 0.1, 'U_b': 2.0, 'U_a': 1.0, 'epsilon': 0.10967, 'mia': 0.01061, 'obj': 19.0, 'delta': 0.3416, 'sensitivity': 1.0}
+epsilon: 0.4 sigma: 0.48242367051124024
+
+
+epsilon: 0.5 params: {'a1': 0.1, 'a3': 0.1, 'a4': 0.1, 'G_theta': 7.5, 'G_k': 1.0, 'E_lambda': 0.1, 'U_b': 2.0, 'U_a': 1.0, 'epsilon': 0.10967, 'mia': 0.01061, 'obj': 19.0, 'delta': 0.3416, 'sensitivity': 1.0}
+epsilon: 0.5 sigma: 0.48242367051124024
+
+
+epsilon: 1 params: {'a1': 0.1, 'a3': 0.1, 'a4': 0.1, 'G_theta': 7.5, 'G_k': 1.0, 'E_lambda': 0.1, 'U_b': 2.0, 'U_a': 1.0, 'epsilon': 0.10967, 'mia': 0.01061, 'obj': 19.0, 'delta': 0.3416, 'sensitivity': 1.0}
+epsilon: 1 sigma: 0.48242367051124024
+
+
+epsilon: 1.5 params: {'a1': 0.1, 'a3': 0.1, 'a4': 0.1, 'G_theta': 7.5, 'G_k': 1.0, 'E_lambda': 0.1, 'U_b': 2.0, 'U_a': 1.0, 'epsilon': 0.10967, 'mia': 0.01061, 'obj': 19.0, 'delta': 0.3416, 'sensitivity': 1.0}
+epsilon: 1.5 sigma: 0.48242367051124024
+
+
+epsilon: 2 params: {'a1': 0.1, 'a3': 0.1, 'a4': 0.1, 'G_theta': 7.5, 'G_k': 1.0, 'E_lambda': 0.1, 'U_b': 2.0, 'U_a': 1.0, 'epsilon': 0.10967, 'mia': 0.01061, 'obj': 19.0, 'delta': 0.3416, 'sensitivity': 1.0}
+epsilon: 2 sigma: 0.48242367051124024
+
+
+epsilon: 2.5 params: {'a1': 0.1, 'a3': 0.1, 'a4': 0.1, 'G_theta': 7.5, 'G_k': 1.0, 'E_lambda': 0.1, 'U_b': 2.0, 'U_a': 1.0, 'epsilon': 0.10967, 'mia': 0.01061, 'obj': 19.0, 'delta': 0.3416, 'sensitivity': 1.0}
+epsilon: 2.5 sigma: 0.48242367051124024
+
+
+epsilon: 3 params: {'a1': 0.1, 'a3': 0.1, 'a4': 0.1, 'G_theta': 7.5, 'G_k': 1.0, 'E_lambda': 0.1, 'U_b': 2.0, 'U_a': 1.0, 'epsilon': 0.10967, 'mia': 0.01061, 'obj': 19.0, 'delta': 0.3416, 'sensitivity': 1.0}
+epsilon: 3 sigma: 0.48242367051124024
+
+
+epsilon: 8 params: {'a1': 0.1, 'a3': 0.1, 'a4': 0.1, 'G_theta': 7.5, 'G_k': 1.0, 'E_lambda': 0.1, 'U_b': 2.0, 'U_a': 1.0, 'epsilon': 0.10967, 'mia': 0.01061, 'obj': 19.0, 'delta': 0.3416, 'sensitivity': 1.0}
+epsilon: 8 sigma: 0.48242367051124024
+
+

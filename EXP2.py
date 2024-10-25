@@ -6,7 +6,7 @@ from noise.plrv import compute_obj_Gaussian
 from noise.noise_params import distributions
 
 
-alpha=0.05
+alpha=0.2
 sensitivities = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
 
 df = pd.DataFrame([])
@@ -44,8 +44,8 @@ for sensitivity in sensitivities:
 
 
 # EXP2: [choice of noise with clipping] fix T; fix K; vary sensitivity; plot figure for both PLRV and Gaussian: [x]MIA -- [y]ACC_{best};
-K=0.4
-K=0.09957
+K=0.2
+# K=0.09957
 acc = [[], []]
 for sensitivity in sensitivities:
     filtered_df = df[(df['sensitivity'] == sensitivity)]
@@ -64,6 +64,6 @@ plt.xlabel('MIA threshold')
 plt.ylabel('Accuracy (mean of epsilon)')
 plt.grid()
 plt.legend()
-plt.savefig("results/exp2.k=0.4.png")
+plt.savefig("results/exp2.alpha=0.2.k=0.2.png")
 
 

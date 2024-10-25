@@ -6,7 +6,7 @@ from noise.plrv import compute_obj_Gaussian
 from noise.noise_params import distributions
 
 
-alpha=0.05
+alpha=0.2
 sensitivities = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
 
 df = pd.DataFrame([])
@@ -66,7 +66,7 @@ for sensitivity in sensitivities:
 
 
 # EXP3: fix MIA; find noise parameters with best acc for different epsilon.
-K=0.4
+K=0.2
 sensitivity=1.0
 epsilons = [0.1, 0.2, 0.3, 0.4, 0.5, 1, 1.5, 2, 2.5, 3, 8]
 
@@ -88,5 +88,5 @@ plt.xlabel('Epsilon')
 plt.ylabel('Accuracy (mean of epsilon)')
 plt.grid()
 plt.legend()
-plt.savefig("results/exp3.sen=1k=0.4.png")
+plt.savefig("results/exp3.alpha=0.2.sen=1k=0.2.png")
 
