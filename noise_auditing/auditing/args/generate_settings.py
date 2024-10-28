@@ -23,10 +23,10 @@ for dataset, model, noise_type in product(datasets, models, noise_types):
     pois_ct = [1]
     clip_norm = [1]
     trials_start = 0
-    trials_end = 100
+    trials_end = 1
     trials = (trials_start, trials_end)
     if noise_type == "gaussian":
-        noise_params = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+        noise_params = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     elif noise_type == "lmo":
         noise_params = [0.01, 0.10967]
     save_dir = f"../../save_results/auditing/{exp_type}/{dataset}_{model}/"

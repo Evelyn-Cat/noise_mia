@@ -39,10 +39,14 @@ def init_2(dataset="fmnist", model="lr"):
     assert save_dir_l == save_dir_g
     return exp_type_g, data_dir_g, dataset_g, model_g, pois_cts_g, clip_norms_g, noise_params_g, noise_type_g, save_dir_g, bkd_start_g, bkd_trials_g
 
+def init_3():
+    return 
 
 
 def init(noise="gaussian", dataset="fmnist", model="lr"):
     if noise == ["gaussian", "lmo"]:
         return init_2(dataset, model)
+    elif noise == "mia_guard":
+        return init_3(noise, dataset, model)
     else:
         return init_1(noise, dataset, model)
