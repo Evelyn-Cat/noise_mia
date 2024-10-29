@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from noise.noise_params import distributions
+from noise_mia.noise.noise_params_134 import distributions
 
 # EXP4: the optimal noise visualization.
 from noise.noise_generation import generate_noise

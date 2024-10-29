@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from noise.parser import parser_file
 from noise.plrv import compute_obj_Gaussian
-from noise.noise_params import distributions
+from noise_mia.noise.noise_params_134 import distributions
 
 
 alpha=0.2

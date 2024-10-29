@@ -1,8 +1,8 @@
 import numpy as np
 import pandas as pd
 from itertools import product
-from noise_mia.noise.noise_privacy import compute_rdp_order, compute_mia, compute_obj
-from noise_mia.noise.noise_params import orders, distributions, search_range
+from noise_mia.noise.noise_privacy_134 import compute_rdp_order, compute_mia
+from noise_mia.noise.noise_params_134 import orders, distributions, search_range
 
 expanded_items = []
 for key, values in search_range.items():
@@ -23,20 +23,17 @@ def main(sensitivity, alpha, T=1, filename=None):
             else:
                 param_dict[key] = combination[i]
         
-        betas, beta_index, beta, mia, epsilon, delta = compute_mia(param_dict, sensitivity=sensitivity, epsilon=param_dict['epsilon'], alpha=alpha, distributions=distributions, T=T)
-        obj1 = compute_obj(param_dict, distributions=distributions, mode=1)
-        obj2 = compute_obj(param_dict, distributions=distributions, mode=2)
+        betas, beta_index, beta, mia, delta = compute_mia(param_dict, sensitivity, param_dict['epsilon'], alpha=alpha, T=T)
+        objective = param_dict["G_k"] * param_dict["G_theta"] + (param_dict['U_a'] + param_dict['U_b'])/2 + 1/param_dict['E_lambda']
         
         if betas and delta<1:
             print(combination)
             if cnt == 0:
-                f.write("\t".join(list(param_dict.keys()) + ['mia', 'epsilon', 'delta', 'obj1', 'obj2']) + '\n')
+                f.write("\t".join(list(param_dict.keys()) + ['mia', 'obj', 'delta']) + '\n')
                 cnt = cnt + 1
             param_dict['mia'] = mia
-            param_dict['epsilon'] = epsilon
+            param_dict['obj'] = objective
             param_dict['delta'] = delta
-            param_dict['obj1'] = obj1
-            param_dict['obj2'] = obj2
             f.write("\t".join(map(str, param_dict.values())) + '\n')
     f.close()
 

@@ -8,10 +8,9 @@ from .noise_params_134 import orders, sensitivity
 def compute_rdp_order(N, order, sensitivity):
     def compute_M(weight):
         MGF_1 = ((1-N['a1']*weight*N['G_theta'])**(-N['G_k']))  # Gamma
-        # MGF_3 = (N['E_lambda']/(N['E_lambda']-N['a3']*weight))  # Exponential
+        MGF_3 = (N['E_lambda']/(N['E_lambda']-N['a3']*weight))  # Exponential
         MGF_4 = ((np.exp(N['a4']*weight*N['U_b'])-np.exp(N['a4']*weight*N['U_a']))/(N['a4']*weight*(N['U_b']-N['U_a'])))  # Uniform
-        # MGFs = MGF_1 * MGF_3 * MGF_4
-        MGFs = MGF_1 * MGF_4
+        MGFs = MGF_1 * MGF_3 * MGF_4
         return MGFs
     
     try:
@@ -27,14 +26,13 @@ def compute_rdp_order(N, order, sensitivity):
 
 def compute_ma(N, order, sensitivity, T=1):
     def compute_M(weight, T=1):
-        MGF_1 = ((1-weight*N['G_theta'])**(-N['G_k']))  # Gamma
-        # MGF_3 = (N['E_lambda']/(N['E_lambda']-N['a3']*weight))  # Exponential
-        # MGF_4 = ((np.exp(N['a4']*weight*N['U_b'])-np.exp(N['a4']*weight*N['U_a']))/(N['a4']*weight*(N['U_b']-N['U_a'])))  # Uniform
+        MGF_1 = ((1-N['a1']*weight*N['G_theta'])**(-N['G_k']))  # Gamma
+        MGF_3 = (N['E_lambda']/(N['E_lambda']-N['a3']*weight))  # Exponential
+        MGF_4 = ((np.exp(N['a4']*weight*N['U_b'])-np.exp(N['a4']*weight*N['U_a']))/(N['a4']*weight*(N['U_b']-N['U_a'])))  # Uniform
         # print(f"MGF_1:{MGF_1}")
         # print(f"MGF_3:{MGF_3}")
         # print(f"MGF_4:{MGF_4}")
-        # MGFs = MGF_1 * MGF_3 * MGF_4
-        MGFs = MGF_1
+        MGFs = MGF_1 * MGF_3 * MGF_4
         MGFs = MGFs ** T
         return MGFs
     
@@ -55,12 +53,12 @@ def compute_ma(N, order, sensitivity, T=1):
     return ma_N
 
 
-def compute_mia(N, sensitivity, epsilon, alpha):
+def compute_mia(N, sensitivity, epsilon, alpha, T):
     betas = {}
     for order in orders:
         try:
             # print(f"order: {order} sensitivity: {sensitivity}")
-            ma = compute_ma(N, order, sensitivity)
+            ma = compute_ma(N, order, sensitivity, T)
             # print(f"ma:{ma}")
             delta = np.exp(compute_ma(N, order, sensitivity) - order * epsilon)
             # print(f"delta:{delta}")

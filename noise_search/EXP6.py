@@ -1,8 +1,8 @@
 # >>> [a dual grid search] if objective function=> mean(PLRV) fixed => grid search min(MIA)
 import numpy as np
 import matplotlib.pyplot as plt
-from noise.noise_params import distributions, orders
-from noise.noise_privacy import compute_rdp_order
+from noise_mia.noise.noise_params_134 import distributions, orders
+from noise_mia.noise.noise_privacy_134 import compute_rdp_order
 from noise.rdp_accounting import get_privacy_spent
 
 # EXP5: vary T

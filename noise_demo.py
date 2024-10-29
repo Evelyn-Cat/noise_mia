@@ -1,4 +1,4 @@
-from noise.noise_params import noise_params, distributions
+from noise_mia.noise.noise_params_134 import noise_params, distributions
 from noise.noise_generation import generate_noise
 
 noise_size = 10
