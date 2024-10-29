@@ -58,18 +58,18 @@ noise_params = {}
 # }
 
 search_range ={
-    ("Gamma"): {
-        "G_theta": np.linspace(0.1, 10, 50), # theta>0; t<1/theta
-        "G_k": np.linspace(0.1, 10, 50), # k>0; t<1/theta
+    ("Gamma", ): {
+        "G_theta": np.linspace(0.1, 10, 10), # theta>0; t<1/theta
+        "G_k": np.linspace(0.1, 10, 10), # k>0; t<1/theta
         "epsilon": np.linspace(0.01, 3, 31),
     },
     ("Gamma", "Uniform"): {
         "a1": np.linspace(0.1, 0.9, 3),
         "a4": np.linspace(0.1, 0.9, 3),
-        "G_theta": np.linspace(0.1, 10, 50), # theta>0; t<1/theta
-        "G_k": np.linspace(0.1, 10, 50), # k>0; t<1/theta
-        "U_b": np.linspace(1, 10, 50), # b>a; when t=0: MGF=1;
-        "U_a": np.linspace(1, 10, 50), # b>a; when t=0: MGF=1;
+        "G_theta": np.linspace(0.1, 10, 10), # theta>0; t<1/theta
+        "G_k": np.linspace(0.1, 10, 10), # k>0; t<1/theta
+        "U_b": np.linspace(1, 10, 10), # b>a; when t=0: MGF=1;
+        "U_a": np.linspace(1, 10, 10), # b>a; when t=0: MGF=1;
         "epsilon": np.linspace(0.01, 3, 31),
     },
     ("Gamma", "Exponential", "Uniform"): {

@@ -1,18 +1,29 @@
 import numpy as np
 import pandas as pd
 from itertools import product
-from noise_mia.noise.noise_privacy import compute_rdp_order, compute_mia, compute_obj
-from noise_mia.noise.noise_params import orders, distributions, search_range
+from noise.noise_privacy import compute_mia, compute_obj
+from noise.noise_params import orders, distributions, search_range
 
-expanded_items = []
-for key, values in search_range.items():
-    expanded_items.append([value for value in values])
-all_combinations = list(product(*expanded_items))
-print(all_combinations[1])
+def main(sensitivity, alpha, T=1, dists="geu", filename=None, search_range=search_range):
+    distributions = []
+    if "g" in dists:
+        distributions.append("Gamma")
+    elif "e" in dists:
+        distributions.append("Exponential")
+    elif "u" in dists:
+        distributions.append("Uniform")
+    
+    search_range = search_range[tuple(distributions)]
 
-def main(sensitivity, alpha, T=1, filename=None):
+    
+    expanded_items = []
+    for key, values in search_range.items():
+        expanded_items.append([value for value in values])
+    all_combinations = list(product(*expanded_items))
+    print(all_combinations[1])
+
     cnt = 0
-    filename = f"results/sen_{sensitivity}_alpha_{alpha}_T_{T}.txt" if filename==None else filename
+    filename = f"results/{dists}.sen_{sensitivity}_alpha_{alpha}_T_{T}.txt" if filename==None else filename
     f = open(filename, "w", encoding="utf-8")
     for combination in all_combinations:
         param_dict = {}
@@ -22,6 +33,10 @@ def main(sensitivity, alpha, T=1, filename=None):
                     param_dict[sub_key] = sub_value
             else:
                 param_dict[key] = combination[i]
+        
+        if "U_b" in param_dict and "U_a" in param_dict:
+            if param_dict['U_b'] <= param_dict['U_a']:
+                continue
         
         betas, beta_index, beta, mia, epsilon, delta = compute_mia(param_dict, sensitivity=sensitivity, epsilon=param_dict['epsilon'], alpha=alpha, distributions=distributions, T=T)
         obj1 = compute_obj(param_dict, distributions=distributions, mode=1)
@@ -61,6 +76,7 @@ if __name__ == '__main__':
     sensitivity = float(sys.argv[1])
     alpha = float(sys.argv[2])
     T = int(sys.argv[3])
+    distributions=sys.argv[4] # "geu"
     # print(sensitivity, alpha, T)
-    main(sensitivity, alpha, T)
+    main(sensitivity, alpha, T, distributions, search_range=search_range)
 
