@@ -32,27 +32,35 @@ def compute_ma(N, order=1.1, sensitivity=1, distributions=["Gamma", "Exponential
             try:
                 MGF_Gamma = ((1-N['a1']*t*N['G_theta'])**(-N['G_k']))  # Gamma
             except:
-                print("MGF_Gamma cannot be computed and we set MGF_Gamma=1.")
+                print(f"MGF_Gamma cannot be computed so we pass this option: {N}")
+                return np.nan
             MGFs = MGFs * MGF_Gamma
         elif "Exponential" in distributions:
             try:
                 MGF_Exp = (N['E_lambda']/(N['E_lambda']-N['a3']*t))  # Exponential
             except:
-                print("MGF_Exp cannot be computed and we set MGF_Exp=1.")
+                print(f"MGF_Exp cannot be computed so we pass this option: {N}")
+                return np.nan
             MGFs = MGFs * MGF_Exp
         elif "Uniform" in distributions:
             try:
                 MGF_Uniform = ((np.exp(N['a4']*t*N['U_b'])-np.exp(N['a4']*t*N['U_a']))/(N['a4']*t*(N['U_b']-N['U_a'])))  # Uniform
             except:
-                print("MGF_Uniform cannot be computed and we set MGF_Uniform=1.")
+                print(f"MGF_Uniform cannot be computed so we pass this option: {N}")
+                return np.nan
             MGFs = MGFs * MGF_Uniform
         
         MGFs = MGFs ** T
         return MGFs
     
-    MGF1 = compute_M(t=order*sensitivity, distributions=distributions, T=T)
-    MGF2 = compute_M(t=-(order+1)*sensitivity, distributions=distributions, T=T)
-    ma_N = np.log(((order+1) * MGF1 + order * MGF2)/(2*order+1))
+    try:
+        MGF1 = compute_M(t=order*sensitivity, distributions=distributions, T=T)
+        MGF2 = compute_M(t=-(order+1)*sensitivity, distributions=distributions, T=T)
+        ma_N = np.log(((order+1) * MGF1 + order * MGF2)/(2*order+1))
+        print("MGF1, MGF2 or ma_N cannot be computed.")
+    except:
+        return np.nan
+    
     return ma_N
 
 
@@ -61,7 +69,9 @@ def compute_mia(N, sensitivity=1, epsilon=1, alpha=0.2, distributions=["Gamma", 
     for order in orders:
         try:
             ma = compute_ma(N, order=order, sensitivity=sensitivity, distributions=distributions, T=T)
-            
+            if ma == np.nan:
+                return [], [], [], [], [], []
+
             delta = np.exp(ma - order * epsilon)
             beta1 = 1 - delta - np.exp(epsilon) * alpha
             beta2 = np.exp(-epsilon) * (1 - delta - alpha)

@@ -39,20 +39,20 @@ def main(sensitivity, alpha, T=1, dists="geu", filename=None, search_range=searc
                 continue
         
         betas, beta_index, beta, mia, epsilon, delta = compute_mia(param_dict, sensitivity=sensitivity, epsilon=param_dict['epsilon'], alpha=alpha, distributions=distributions, T=T)
-        obj1 = compute_obj(param_dict, distributions=distributions, mode=1)
-        obj2 = compute_obj(param_dict, distributions=distributions, mode=2)
         
         if betas and delta<1:
-            print(combination)
+            obj1 = compute_obj(param_dict, distributions=distributions, mode=1)
+            obj2 = compute_obj(param_dict, distributions=distributions, mode=2)
+        
             if cnt == 0:
-                f.write("\t".join(list(param_dict.keys()) + ['mia', 'epsilon', 'delta', 'obj1', 'obj2']) + '\n')
+                f.write("\t".join(list(param_dict.keys()) + ['mia', 'delta', 'obj1', 'obj2']) + '\n')
                 cnt = cnt + 1
             param_dict['mia'] = mia
             param_dict['epsilon'] = epsilon
             param_dict['delta'] = delta
             param_dict['obj1'] = obj1
             param_dict['obj2'] = obj2
-            f.write("\t".join(map(str, param_dict.values())) + '\n')
+            f.write("\t".join(f"{value:.3f}" for value in param_dict.values()) + '\n')
     f.close()
 
 
