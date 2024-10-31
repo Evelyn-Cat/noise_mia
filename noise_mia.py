@@ -45,7 +45,11 @@ def main(sensitivity, alpha, T=1, dists="geu", filename=None, search_range=searc
             obj2 = compute_obj(param_dict, distributions=distributions, mode=2)
         
             if cnt == 0:
-                f.write("\t".join(list(param_dict.keys()) + ['mia', 'delta', 'obj1', 'obj2']) + '\n')
+                if dists == "g":
+                    line = "a1	    G_theta	G_k	    epsilon	mia	    delta	obj1	obj2\n"
+                    f.write(line)
+                else:
+                    f.write("\t".join(list(param_dict.keys()) + ['mia', 'delta', 'obj1', 'obj2']) + '\n')
                 cnt = cnt + 1
             param_dict['mia'] = mia
             param_dict['epsilon'] = epsilon
