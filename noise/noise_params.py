@@ -59,6 +59,7 @@ noise_params = {}
 
 search_range ={
     ("Gamma", ): {
+        "a1": [1],
         "G_theta": np.linspace(0.1, 10, 10), # theta>0; t<1/theta
         "G_k": np.linspace(0.1, 10, 10), # k>0; t<1/theta
         "epsilon": np.linspace(0.01, 3, 31),

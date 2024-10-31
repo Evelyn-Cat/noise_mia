@@ -27,16 +27,24 @@ from .noise_params import orders, threshold
 
 def compute_ma(N, order=1.1, sensitivity=1, distributions=["Gamma", "Exponential", "Uniform"], T=1):
     def compute_M(t, distributions, T=1):
-        MGF_Gamma = ((1-N['a1']*t*N['G_theta'])**(-N['G_k']))  # Gamma
-        MGF_Exp = (N['E_lambda']/(N['E_lambda']-N['a3']*t))  # Exponential
-        MGF_Uniform = ((np.exp(N['a4']*t*N['U_b'])-np.exp(N['a4']*t*N['U_a']))/(N['a4']*t*(N['U_b']-N['U_a'])))  # Uniform
-        
         MGFs = 1
         if "Gamma" in distributions:
+            try:
+                MGF_Gamma = ((1-N['a1']*t*N['G_theta'])**(-N['G_k']))  # Gamma
+            except:
+                print("MGF_Gamma cannot be computed and we set MGF_Gamma=1.")
             MGFs = MGFs * MGF_Gamma
         elif "Exponential" in distributions:
+            try:
+                MGF_Exp = (N['E_lambda']/(N['E_lambda']-N['a3']*t))  # Exponential
+            except:
+                print("MGF_Exp cannot be computed and we set MGF_Exp=1.")
             MGFs = MGFs * MGF_Exp
         elif "Uniform" in distributions:
+            try:
+                MGF_Uniform = ((np.exp(N['a4']*t*N['U_b'])-np.exp(N['a4']*t*N['U_a']))/(N['a4']*t*(N['U_b']-N['U_a'])))  # Uniform
+            except:
+                print("MGF_Uniform cannot be computed and we set MGF_Uniform=1.")
             MGFs = MGFs * MGF_Uniform
         
         MGFs = MGFs ** T
@@ -57,7 +65,6 @@ def compute_mia(N, sensitivity=1, epsilon=1, alpha=0.2, distributions=["Gamma", 
             delta = np.exp(ma - order * epsilon)
             beta1 = 1 - delta - np.exp(epsilon) * alpha
             beta2 = np.exp(-epsilon) * (1 - delta - alpha)
-            print(delta, beta1, beta2)
             
             if not np.isnan(beta1) and not np.isnan(beta2):
                 betas[order] = np.max([0, beta1, beta2])
