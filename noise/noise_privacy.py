@@ -57,6 +57,7 @@ def compute_mia(N, sensitivity=1, epsilon=1, alpha=0.2, distributions=["Gamma", 
             delta = np.exp(ma - order * epsilon)
             beta1 = 1 - delta - np.exp(epsilon) * alpha
             beta2 = np.exp(-epsilon) * (1 - delta - alpha)
+            print(delta, beta1, beta2)
             
             if not np.isnan(beta1) and not np.isnan(beta2):
                 betas[order] = np.max([0, beta1, beta2])

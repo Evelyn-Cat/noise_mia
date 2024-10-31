@@ -17,7 +17,7 @@ i.e., is there any RL based method for faster MIA
 fast querying and reward if it was a member and punish if it is not
 this is a good one actually; so RL can be trained white-box or black-box ; but MIA labels are utilized in RL training; 
 The goal is to train a neural network model which gets queries and outcomes of any trained model and return Membership quickly 
-
+3. how k, theta impact mia and acc
 
 
 TODO 2024.10.31
