@@ -3,17 +3,24 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from noise.parser import parser_file
 from noise.plrv import compute_obj_Gaussian
-from noise_mia.noise.noise_params_134 import distributions
 
 
-alpha=0.2
-sensitivities = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+dists = "g" # g gu geu
+alpha = 0.15  # 0.15 0.2
+sensitivities = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 2.0, 3.0, 4.0, 5.0]
 
 df = pd.DataFrame([])
 for sensitivity in sensitivities:
     # header, content = parser_file(f"results/sen_{sensitivity}_alpha_{alpha}.txt")
-    header, content = parser_file(f"results/sen_{sensitivity}_alpha_{alpha}_T_1.txt")
-    dict_params = dict(zip(header, content))
+    content = parser_file(f"results/{dists}.sen_{sensitivity}_alpha_{alpha}_T_1.txt")
+    
+    if dists == "g":
+        header = ["a1", "G_theta", "G_k", "epsilon", "mia", "delta", "obj1", "obj2"]
+    if dists == "gu":
+        header = []
+    if dists == "geu":
+        header = ["a1", "a3", "a4", "G_theta", "G_k", "E_lambda", "U_b", "U_a", "epsilon", "mia", "delta", "obj1", "obj2"]
+    
     result_list = [{k: v for k, v in zip(header, values)} for values in content]
     result_list = pd.DataFrame(result_list)
     result_list['sensitivity'] = sensitivity
@@ -44,16 +51,16 @@ for sensitivity in sensitivities:
 
 
 # EXP2: [choice of noise with clipping] fix T; fix K; vary sensitivity; plot figure for both PLRV and Gaussian: [x]MIA -- [y]ACC_{best};
-K=0.2
+K=0.005
 # K=0.09957
 acc = [[], []]
 for sensitivity in sensitivities:
     filtered_df = df[(df['sensitivity'] == sensitivity)]
-    max_row = filtered_df.loc[filtered_df['obj'].idxmax()]
+    max_row = filtered_df.loc[filtered_df['obj1'].idxmax()]
     print("sensitivity:", sensitivity, "params:", dict(max_row))
     obj_Gaussian, sigma_Gaussian = compute_obj_Gaussian(K, alpha, sensitivity)
     print("sensitivity:", sensitivity, "sigma:", sigma_Gaussian)
-    acc[0].append(dict(max_row)['obj'])
+    acc[0].append(dict(max_row)['obj1'])
     acc[1].append(obj_Gaussian)
     print("\n")
 
@@ -64,6 +71,6 @@ plt.xlabel('MIA threshold')
 plt.ylabel('Accuracy (mean of epsilon)')
 plt.grid()
 plt.legend()
-plt.savefig("results/exp2.alpha=0.2.k=0.2.png")
+plt.savefig(f"results/{dists}.exp2.alpha={alpha}.k=0.005.png")
 
 

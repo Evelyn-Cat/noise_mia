@@ -1,6 +1,6 @@
 import numpy as np
 from scipy.stats import norm
-from noise_mia.noise.noise_params_134 import orders
+
 
 # f-DP for Gaussian: 0.5 - alpha - u-GDP(sigma) < K
 def compute_obj_Gaussian(K, alpha, sensitivity):

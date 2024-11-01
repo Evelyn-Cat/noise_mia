@@ -3,9 +3,9 @@ import matplotlib.pyplot as plt
 
 def parser_file(filename):
     with open(filename, "r", encoding='utf-8') as f:
-        rs = [i.strip().split("\t") for i in f.readlines()]
-    content = [[float(f"{float(j):.5f}") for j in i] for i in rs[1:]]
-    return rs[0], content
+        rs = [i.strip().split("\t") for i in f.readlines()[1:]]
+    content = [[float(f"{float(j):.5f}") for j in i] for i in rs]
+    return content
 
 if __name__ == '__main__':
     for filename in os.listdir('results'):

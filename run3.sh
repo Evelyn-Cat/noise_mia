@@ -1,7 +1,7 @@
-python noise_mia.py 1.0 0.15 5 gu
-wait
-python noise_mia.py 1.0 0.15 10 gu
-wait
+# python noise_mia.py 1.0 0.15 5 gu
+# wait
+# python noise_mia.py 1.0 0.15 10 gu
+# wait
 python noise_mia.py 1.0 0.15 20 gu
 wait
 python noise_mia.py 1.0 0.15 50 gu
