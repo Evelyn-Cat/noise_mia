@@ -6,6 +6,7 @@ DEFAULT_DISTRIBUTIONS = ["Gamma", "Exponential", "Uniform"]
 
 
 def generate_lmo_noise(lmo=LMO_ARGS[0.3], distributions=DEFAULT_DISTRIBUTIONS, noise_size=1):
+    print(lmo)
     lmo_bs = generate_lmo_b(lmo, distributions=distributions, noise_size=noise_size)
     return np.random.laplace(0, lmo_bs)
 

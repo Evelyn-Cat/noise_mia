@@ -160,6 +160,7 @@ def make_vectorized_optimizer_class(cls):
 
             def reduce_noise_normalize_batch(stacked_grads):
                 summed_grads = tf.reduce_sum(input_tensor=stacked_grads, axis=0)
+                print(f"check this value: {self._noise_multiplier}")
                 noise = generate_lmo_noise(LMO_ARGS[self._noise_multiplier], DEFAULT_DISTRIBUTIONS, tf.shape(input=summed_grads))
                 noise = tf.convert_to_tensor(noise, dtype=tf.float32)
                 noised_grads = summed_grads + noise

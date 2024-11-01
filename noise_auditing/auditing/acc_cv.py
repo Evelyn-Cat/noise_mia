@@ -101,6 +101,7 @@ class auditing_CV:
         if FLAGS.noise_type == "lmo":
             print("Using the LMO settings.")
             import lmo_config.optimizers as dp_optimizer_vectorized
+            print(f"check this value 1: {FLAGS.noise_params}")
         elif FLAGS.noise_type == "gaussian":
             from tensorflow_privacy.privacy.optimizers import dp_optimizer_vectorized
         
