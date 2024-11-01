@@ -14,14 +14,13 @@ def main(sensitivity, alpha, T=1, dists="geu", filename=None, search_range=searc
         distributions.append("Uniform")
     
     search_range = search_range[tuple(distributions)]
-
     
     expanded_items = []
     for key, values in search_range.items():
         expanded_items.append([value for value in values])
     all_combinations = list(product(*expanded_items))
     print(all_combinations[1])
-
+    
     cnt = 0
     filename = f"results/{dists}.sen_{sensitivity}_alpha_{alpha}_T_{T}.txt" if filename==None else filename
     f = open(filename, "w", encoding="utf-8")

@@ -127,7 +127,7 @@ class auditing_CV:
 
 def main(_):
     dataset = FLAGS.dataset
-    FLAGS.exp_name = FLAGS.dataset + "-" + FLAGS.model + "-" + FLAGS.noise_type + "-" + str(FLAGS.noise_params)
+    FLAGS.exp_name = FLAGS.dataset + "-" + FLAGS.model + "-" + FLAGS.noise_type + "-" + str(FLAGS.noise_params) + "-" + str(FLAGS.epochs)
     # save_dir = f"/mnt/nvme1n1p1/home/qiy22005/PRO/noise_mia/models"
     
     from init import init
