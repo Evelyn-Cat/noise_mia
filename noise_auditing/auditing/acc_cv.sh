@@ -9,7 +9,7 @@ for param in "${list1[@]}"; do
     for value in "${list2[@]}"; do
         for noise_param in "${noise_params[@]}"; do
             # echo "Processing $param with $value"
-            python acc_cv.py -dataset ${param} -model ${value} -l2_norm_clip 1 -noise_type gaussian -noise_params ${noise_param} -microbatches 1 -epochs 25 -batch_size 250 > log.$param.$value.$noise_param.log
+            python acc_cv.py -dataset ${param} -model ${value} -l2_norm_clip 1 -noise_type gaussian -noise_params ${noise_param} -microbatches 250 -epochs 1 -batch_size 250 > log.$param.$value.$noise_param.log
         done
     done
 done

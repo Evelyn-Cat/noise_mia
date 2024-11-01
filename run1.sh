@@ -58,19 +58,76 @@
 # wait
 # python noise_mia.py 1.0 0.2 1 g
 
-python noise_mia.py 2.0 0.2 1 g
+# python noise_mia.py 2.0 0.2 1 g
+# wait
+# python noise_mia.py 2.0 0.15 1 g
+# wait
+# python noise_mia.py 3.0 0.2 1 g
+# wait
+# python noise_mia.py 3.0 0.15 1 g
+# wait
+# python noise_mia.py 4.0 0.2 1 g
+# wait
+# python noise_mia.py 4.0 0.15 1 g
+# wait
+# python noise_mia.py 5.0 0.2 1 g
+# wait
+# python noise_mia.py 5.0 0.15 1 g
+# wait
+
+
+python noise_mia.py 2.0 0.2 5 g
 wait
-python noise_mia.py 2.0 0.15 1 g
+python noise_mia.py 2.0 0.2 10 g
 wait
-python noise_mia.py 3.0 0.2 1 g
+python noise_mia.py 2.0 0.2 20 g
 wait
-python noise_mia.py 3.0 0.15 1 g
+python noise_mia.py 2.0 0.2 50 g
 wait
-python noise_mia.py 4.0 0.2 1 g
+python noise_mia.py 2.0 0.2 100 g
 wait
-python noise_mia.py 4.0 0.15 1 g
+
+python noise_mia.py 3.0 0.2 5 g
 wait
-python noise_mia.py 5.0 0.2 1 g
+python noise_mia.py 3.0 0.2 10 g
 wait
-python noise_mia.py 5.0 0.15 1 g
+python noise_mia.py 3.0 0.2 20 g
+wait
+python noise_mia.py 3.0 0.2 50 g
+wait
+python noise_mia.py 3.0 0.2 100 g
+wait
+
+python noise_mia.py 4.0 0.2 5 g
+wait
+python noise_mia.py 4.0 0.2 10 g
+wait
+python noise_mia.py 4.0 0.2 20 g
+wait
+python noise_mia.py 4.0 0.2 50 g
+wait
+python noise_mia.py 4.0 0.2 100 g
+wait
+
+
+python noise_mia.py 5.0 0.2 5 g
+wait
+python noise_mia.py 5.0 0.2 10 g
+wait
+python noise_mia.py 5.0 0.2 20 g
+wait
+python noise_mia.py 5.0 0.2 50 g
+wait
+python noise_mia.py 5.0 0.2 100 g
+wait
+
+python noise_mia.py 10.0 0.2 5 g
+wait
+python noise_mia.py 10.0 0.2 10 g
+wait
+python noise_mia.py 10.0 0.2 20 g
+wait
+python noise_mia.py 10.0 0.2 50 g
+wait
+python noise_mia.py 10.0 0.2 100 g
 wait
