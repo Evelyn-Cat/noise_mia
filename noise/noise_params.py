@@ -45,7 +45,13 @@ threshold = {
 #     0.10967: {'a1': 0.1, 'a3': 0.1, 'a4': 0.1, 'G_theta': 7.5, 'G_k': 1.0, 'E_lambda': 0.1, 'U_b': 2.0, 'U_a': 1.0, 'epsilon': 0.10967, 'mia': 0.00482, 'obj': 19.0, 'delta': 0.3416, 'sensitivity': 1.0}
 # }
 
-noise_params = {}
+noise_params = {
+    # 2024.10.31 sensitivity: 1; K: 0.005; from EXP1
+    ("g", 0.2): {'a1': 1.0, 'G_theta': 10.0, 'G_k': 10.0, 'epsilon': 0.01, 'mia': 0.001, 'delta': 0.0, 'obj1': 100.0, 'obj2': 0.0, 'sensitivity': 1.0, 'gaussian': 0.7243976515506757},
+    ("g", 0.15):{'a1': 1.0, 'G_theta': 10.0, 'G_k': 10.0, 'epsilon': 0.01, 'mia': 0.001, 'delta': 0.0, 'obj1': 100.0, 'obj2': 0.0, 'sensitivity': 1.0, 'gaussian': 0.6967240601856282},
+    ("geu", 0.2): {'a1': 0.1, 'a3': 0.1, 'a4': 0.1, 'G_theta': 3.0, 'G_k': 2.0, 'E_lambda': 0.1, 'U_b': 1.0, 'U_a': 0.0, 'epsilon': 0.01, 'mia': 0.001, 'delta': 0.0, 'obj1': 6.0, 'obj2': 0.001, 'sensitivity': 1.0, 'gaussian': 0.7243976515506757},
+    ("geu", 0.15): {'a1': 0.1, 'a3': 0.1, 'a4': 0.1, 'G_theta': 3.0, 'G_k': 2.0, 'E_lambda': 0.1, 'U_b': 1.0, 'U_a': 0.0, 'epsilon': 0.01, 'mia': 0.001, 'delta': 0.0, 'obj1': 6.0, 'obj2': 0.001, 'sensitivity': 1.0, 'gaussian': 0.6967240601856282}
+}
 
 # search_range = {
 #     "a1": np.linspace(0.1, 0.9, 9),
