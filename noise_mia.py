@@ -8,9 +8,9 @@ def main(sensitivity, alpha, T=1, dists="geu", filename=None, search_range=searc
     distributions = []
     if "g" in dists:
         distributions.append("Gamma")
-    elif "e" in dists:
+    if "e" in dists:
         distributions.append("Exponential")
-    elif "u" in dists:
+    if "u" in dists:
         distributions.append("Uniform")
     
     search_range = search_range[tuple(distributions)]
@@ -47,9 +47,13 @@ def main(sensitivity, alpha, T=1, dists="geu", filename=None, search_range=searc
             if cnt == 0:
                 if dists == "g":
                     line = "a1	    G_theta	G_k	    epsilon	mia	    delta	obj1	obj2\n"
-                    f.write(line)
+                elif dists == "gu":
+                    line = "a1	    a4	    G_theta	G_k	    U_b	    U_a	    epsilon	mia	    delta	obj1	obj2\n"
+                elif dists == "geu":
+                    line = "a1	    a3	    a4	    G_theta	G_k	    E_lmda  U_b	    U_a	    epsilon	mia	    delta	obj1	obj2\n"
                 else:
-                    f.write("\t".join(list(param_dict.keys()) + ['mia', 'delta', 'obj1', 'obj2']) + '\n')
+                    raise NotImplementedError
+                f.write(line)
                 cnt = cnt + 1
             param_dict['mia'] = mia
             param_dict['epsilon'] = epsilon
