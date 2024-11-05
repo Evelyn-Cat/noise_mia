@@ -1,0 +1,5 @@
+results/*log
+*.DS_Store
+save_results/auditing/cv.old*
+*pyc
+.git.old
