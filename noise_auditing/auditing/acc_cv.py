@@ -14,7 +14,7 @@ from absl import flags
 
 
 
-flags.DEFINE_string('dataset', 'fmnist', 'fmnist, p100, sst2, qnli.')
+flags.DEFINE_string('dataset', 'p100', 'fmnist, p100, sst2, qnli.')
 flags.DEFINE_string('model', '2f', '[fmnist, p100:] 2f, lr; [sst2, qnli:] r, b.')
 flags.DEFINE_integer('n_pois', 8, '[number of clusters:] 1, 2, 4, 8.')
 flags.DEFINE_float('l2_norm_clip', 1.0, '[Clipping norm] 1')
@@ -59,6 +59,7 @@ class auditing_CV:
             bkd_trn_y = np.eye(100)[bkd_trn_y]
             FLAGS.learning_rate = 2
             FLAGS.epochs = 100
+            print(len(nobkd_trn_y))
         
         return bkd_trn_x, bkd_trn_y, nobkd_trn_x, nobkd_trn_y, bkd_x, bkd_y, tst_x, tst_y
     
@@ -143,7 +144,7 @@ def main(_):
         exit(0)
     
 
-    data_dir = "/mnt/nvme1n1p1/home/qiy22005/PRO/noise_mia/noise_auditing/auditing/datasets"
+    data_dir = "/Users/mac/Documents/PRO/noise_mia/noise_auditing/auditing/datasets"
     if "fmnist" in dataset:
         loader = np.load(os.path.join(data_dir, "fmnist/clipbkd-new-1.npy"), allow_pickle=True)
         all_bkds = {"tst": loader[3],"trn": loader[0]}
