@@ -1,0 +1,9 @@
+
+# mia = f1(k, theta)
+# (k,theta) = f2(acc, mia, clip, q)
+# (k,theta) = f3(epsilon, distortion, clip, q)
+
+[clean code]
+1 scatter plot I have, check gaussian and mg noise pairs ($$biggest$$ gap for mia and same acc) and find its k, theta
+2 [optimal config] generate acc and mia for new configurations
+
