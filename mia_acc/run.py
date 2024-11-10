@@ -1,10 +1,14 @@
-for dists in ["g", "geu", "gu"]:
-    for alpha in [0.15, 0.2]:
-        for T in [5, 10, 20, 50, 100]:
-            print(f"python run_mia_acc.py 1.0 {alpha} {T} {dists}")
-            print("wait")
+version="v4"
 
-    for alpha in [0.15, 0.2]:
-        for sen in [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]:
-            print(f"python run_mia_acc.py {sen} {alpha} 1 {dists}")
+suffix_epochs=1000
+savefolder="save_folder"
+prefix_noise_type="mg"
+
+for dataset in ["p100"]:
+    for model in ["2f"]:
+        for prefix_noise_params in list(range(90)):
+            print(f"python run_mia_acc.py {dataset} {model} {suffix_epochs} {savefolder} {prefix_noise_type} {prefix_noise_params} > logs/{version}.{prefix_noise_type}.{prefix_noise_params}.{dataset}.{model}.T_{suffix_epochs}.log")
             print("wait")
+            break
+        break
+    break

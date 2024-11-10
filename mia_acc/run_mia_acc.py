@@ -9,13 +9,11 @@ from util import *
 # load task related params
 suffix_dataset=sys.argv[1] # "p100" "fmnist"
 suffix_model=sys.argv[2] # "2f" "lr"
-microbatches=int(sys.argv[3])
-batchsize=int(sys.argv[4])
-suffix_epochs=int(sys.argv[5])
-savefolder=sys.argv[6]
+suffix_epochs=int(sys.argv[3])
+savefolder=sys.argv[4]
 # load noise related params
-prefix_noise_type=sys.arggs[7] # "mg" "gaussian"
-prefix_noise_params=sys.argv[8]
+prefix_noise_type=sys.argv[5] # "mg" "gaussian"
+prefix_noise_params=sys.argv[6]
 # different machine
 data_dir="../noise_auditing/auditing/datasets" # sys.argv[9]
 
@@ -30,15 +28,20 @@ Qt_filepath="cfg_noise/v4.Qt.mat"
 suffix_columns = ["eps", "distortion", "clip", "q", "G_k", "G_theta"]
 ## load mg noise configs
 cfg = load_Qt_mat(Qt_filepath, columns=suffix_columns)
-print(cfg.shape, '\n', cfg)
+# print(cfg.shape, '\n', cfg)
 cfg = preprocess_df(cfg, remove_nan=True, remove_inf=True)
-print(cfg.shape, '\n', cfg)
+# print(cfg.shape, '\n', cfg)
 epsilon, distortion, clip, q, G_k, G_theta = cfg.loc[int(prefix_noise_params), suffix_columns]
 
-if prefix_noise_type == "mg":
-    prefix_noise_params = [prefix_noise_type, {"a1": 1, "G_k": G_k, "G_theta": G_theta}]
+if suffix_dataset == "p100":
+    microbatches=int(10000*q)
+    batchsize=microbatches
+elif suffix_dataset == "fmnist":
+    microbatches=int(6000*q)
+    batchsize=microbatches
 else:
-    prefix_noise_params = float(prefix_noise_params)
+    raise NotImplementedError
+
 
 # load dataset and exp name
 tasktype, data, learning_rate = read_dataset(suffix_dataset, data_dir)
@@ -52,9 +55,15 @@ if os.path.exists(savepath):
     print(f"{savepath} exists.")
     exit(0)
 
+if prefix_noise_type == "mg":
+    prefix_noise_params = [prefix_noise_type, {"a1": 1, "G_k": G_k, "G_theta": G_theta}]
+else:
+    prefix_noise_params = float(prefix_noise_params)
+
 
 # train model and save models
-mia_acc = mia_acc_CV.init(suffix_dataset,suffix_model,suffix_epochs,microbatches,learning_rate,batchsize,clip,prefix_noise_type,prefix_noise_params)
+print(prefix_noise_params)
+mia_acc = mia_acc_CV(suffix_dataset,suffix_model,suffix_epochs,microbatches,learning_rate,batchsize,clip,prefix_noise_type,prefix_noise_params)
 model = mia_acc.build_model(trn_x, trn_y)
 
 np.random.seed(None)
@@ -76,8 +85,8 @@ accuracy_mia = mia(model, trn_x, trn_y, tst_x, tst_y)
 
 # output main and mia task accuracy
 if prefix_noise_type == "mg":
-    out_line=f"{epsilon}#{distortion}#{clip}#{q}#{G_k}#{G_theta}#{accuracy_maintask}#{accuracy_mia}"
+    out_line=f"print_results#{epsilon}#{distortion}#{clip}#{q}#{G_k}#{G_theta}#{accuracy_maintask}#{accuracy_mia}"
 elif prefix_noise_type == "gaussian":
-    out_line=f"{prefix_noise_params}#{accuracy_maintask}#{accuracy_mia}"
+    out_line=f"print_results#{prefix_noise_params}#{accuracy_maintask}#{accuracy_mia}"
 print(out_line)
 

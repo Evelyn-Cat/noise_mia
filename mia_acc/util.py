@@ -104,7 +104,7 @@ def mia(model, trn_x, trn_y, tst_x, tst_y):
 
 # task related: CV task relate
 class mia_acc_CV:
-    def init(self, dataset, model, epochs, microbatches, learning_rate, batchsize, clip, noise_type, noise_params):
+    def __init__(self, dataset, model, epochs, microbatches, learning_rate, batchsize, clip, noise_type, noise_params):
         self.dataset=dataset
         self.model=model
         self.microbatches=microbatches
@@ -169,7 +169,7 @@ class mia_acc_CV:
         model.fit(train_x, train_y,
                 epochs=self.epochs,
                 validation_data=(test_x, test_y),
-                batch_size=self.batch_size)
+                batch_size=self.batchsize)
         
         model.save(savepath)
         print(f"model is saved at {savepath}")
