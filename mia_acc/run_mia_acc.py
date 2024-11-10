@@ -39,6 +39,7 @@ if suffix_dataset == "p100":
 elif suffix_dataset == "fmnist":
     microbatches=int(6000*q)
     batchsize=microbatches
+    exit(0)
 else:
     raise NotImplementedError
 
