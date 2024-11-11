@@ -3,3 +3,5 @@ results/*log
 save_results/auditing/cv.old*
 *pyc
 .git.old
+*.h5
+*.log
