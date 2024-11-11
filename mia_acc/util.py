@@ -17,6 +17,16 @@ else:
     AdamOptimizer = tf.optimizers.Adam
 
 
+def load_txt(filepath, columns):
+    with open(filepath, 'r', encoding='utf-8') as f:
+        rs = f.readlines()
+
+    df = pd.DataFrame([], columns=columns)
+    for r in rs:
+        name, value = r.strip().split(":")[0], r.strip().split(":")[1]
+        df.loc[0, name] = value
+    return df
+
 # noise realted: load Qt.mat
 def load_Qt_mat(filepath, columns):
     data = loadmat(filepath)
