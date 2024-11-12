@@ -1,6 +1,6 @@
 version="v7"
 
-suffix_epochs=50
+suffix_epochs=1000
 savefolder="save_folder"
 prefix_noise_type="mg"
 
