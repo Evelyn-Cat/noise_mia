@@ -4,6 +4,8 @@ import pandas as pd
 from scipy.io import loadmat
 from scipy.special import softmax
 
+DEFAULT_MAX_ORDER = 128
+DEFAULT_ORDER = range(2, DEFAULT_MAX_ORDER + 1)
 DEFAULT_DISTRIBUTIONS = ["Gamma", "Exponential", "Uniform"]
 
 
@@ -59,6 +61,79 @@ def generate_b(params, distributions=DEFAULT_DISTRIBUTIONS, noise_size=1):
         us = us + 0
     
     return 1/us
+
+
+# noise related functions
+def compute_ma(N, order=1.1, sensitivity=1, distributions=["Gamma", "Exponential", "Uniform"], T=1):
+    def compute_M(t, distributions, T=1):
+        MGFs = 1
+        if "Gamma" in distributions:
+            try:
+                MGF_Gamma = ((1-N['a1']*t*N['G_theta'])**(-N['G_k']))  # Gamma
+            except:
+                print(f"MGF_Gamma cannot be computed so we pass this option: {N}")
+                return np.nan
+            MGFs = MGFs * MGF_Gamma
+        elif "Exponential" in distributions:
+            try:
+                MGF_Exp = (N['E_lambda']/(N['E_lambda']-N['a3']*t))  # Exponential
+            except:
+                print(f"MGF_Exp cannot be computed so we pass this option: {N}")
+                return np.nan
+            MGFs = MGFs * MGF_Exp
+        elif "Uniform" in distributions:
+            try:
+                MGF_Uniform = ((np.exp(N['a4']*t*N['U_b'])-np.exp(N['a4']*t*N['U_a']))/(N['a4']*t*(N['U_b']-N['U_a'])))  # Uniform
+            except:
+                print(f"MGF_Uniform cannot be computed so we pass this option: {N}")
+                return np.nan
+            MGFs = MGFs * MGF_Uniform
+        
+        MGFs = MGFs ** T
+        return MGFs
+    
+    try:
+        MGF1 = compute_M(t=order*sensitivity, distributions=distributions, T=T)
+        MGF2 = compute_M(t=-(order+1)*sensitivity, distributions=distributions, T=T)
+        ma_N = np.log(((order+1) * MGF1 + order * MGF2)/(2*order+1))
+        print("MGF1, MGF2 or ma_N cannot be computed.")
+    except:
+        return np.nan
+    
+    return ma_N
+
+
+def theoretical_mia(N, sensitivity=1, epsilon=1, alpha=0.2, distributions=["Gamma", "Exponential", "Uniform"], T=1):
+    betas = {}
+    for order in DEFAULT_ORDER:
+        try:
+            ma = compute_ma(N, order=order, sensitivity=sensitivity, distributions=distributions, T=T)
+            if ma == np.nan:
+                return [], [], [], [], [], []
+
+            delta = np.exp(ma - order * epsilon)
+            beta1 = 1 - delta - np.exp(epsilon) * alpha
+            beta2 = np.exp(-epsilon) * (1 - delta - alpha)
+            
+            if not np.isnan(beta1) and not np.isnan(beta2):
+                betas[order] = np.max([0, beta1, beta2])
+            elif not np.isnan(beta1) and np.isnan(beta2):
+                betas[order] = np.max([0, beta1])
+            elif np.isnan(beta1) and not np.isnan(beta2):
+                betas[order] = np.max([0, beta2])
+        except:
+            continue
+    
+    if betas:
+        beta_index = max(betas, key=betas.get)
+        beta = betas[beta_index]
+
+        mia = 0.5 * (1 - alpha - beta)
+        
+        return betas, beta_index, beta, mia, epsilon, delta
+    else:
+        return [], [], [], [], [], []
+
 
 
 # task related: preprocess
