@@ -39,20 +39,3 @@ for prefix_noise_params in cfg.index:
 
 print(cfg)
 cfg.to_csv("collect_results.v7.csv")
-
-# optimal one
-# gaussian one
-
-
-# answer the questions
-# 1. what is the relationship between (k, theta) - [tm, m, a]
-# 2. try to find gaussian that reaches the smallest mia.
-# 3. do we have same conclusions with different parameters? 
-
-
-
-# all MIA methods (RMIA,LIRA etc), datasets, task 
-
-
-
-
