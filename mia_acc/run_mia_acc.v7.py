@@ -23,7 +23,7 @@ if not os.path.exists(savefolder):
 
 ## set hyperparams [here distortion is also sigma for gaussian noise]
 # parameters in this version
-version = "v6"
+version = "v7"
 Qt_filepath="cfg_noise/v4.Qt.mat"
 suffix_columns = ["eps", "distortion", "clip", "q", "G_k", "G_theta"]
 ## load mg noise configs
