@@ -8,16 +8,17 @@ DEFAULT_MAX_ORDER = 128
 DEFAULT_ORDER = range(2, DEFAULT_MAX_ORDER + 1)
 DEFAULT_DISTRIBUTIONS = ["Gamma", "Exponential", "Uniform"]
 
-
-import tensorflow as tf
-from distutils.version import LooseVersion
-if LooseVersion(tf.__version__) < LooseVersion('2.0.0'):
-    GradientDescentOptimizer = tf.train.GradientDescentOptimizer
-    AdamOptimizer = tf.train.AdamOptimizer
-else:
-    GradientDescentOptimizer = tf.optimizers.SGD
-    AdamOptimizer = tf.optimizers.Adam
-
+try:
+    import tensorflow as tf
+    from distutils.version import LooseVersion
+    if LooseVersion(tf.__version__) < LooseVersion('2.0.0'):
+        GradientDescentOptimizer = tf.train.GradientDescentOptimizer
+        AdamOptimizer = tf.train.AdamOptimizer
+    else:
+        GradientDescentOptimizer = tf.optimizers.SGD
+        AdamOptimizer = tf.optimizers.Adam
+except:
+    pass
 
 def load_txt(filepath, columns):
     with open(filepath, 'r', encoding='utf-8') as f:
@@ -36,7 +37,8 @@ def load_Qt_mat(filepath, columns):
         Qt = data['Qt']
         df = pd.DataFrame(Qt, columns=columns)
     except:
-        df = pd.read_csv(filepath, columns=columns)
+        df = pd.read_csv(filepath)
+        df = df[columns]
     return df
 
 

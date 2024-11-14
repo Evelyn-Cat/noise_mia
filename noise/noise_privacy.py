@@ -57,7 +57,7 @@ def compute_ma(N, order=1.1, sensitivity=1, distributions=["Gamma", "Exponential
         MGF1 = compute_M(t=order*sensitivity, distributions=distributions, T=T)
         MGF2 = compute_M(t=-(order+1)*sensitivity, distributions=distributions, T=T)
         ma_N = np.log(((order+1) * MGF1 + order * MGF2)/(2*order+1))
-        print("MGF1, MGF2 or ma_N cannot be computed.")
+        # print("MGF1, MGF2 or ma_N cannot be computed.")
     except:
         return np.nan
     
