@@ -14,7 +14,7 @@ outputfilename=sys.argv[5]
 ## set hyperparams [here distortion is also sigma for gaussian noise]
 # parameters in this version
 version = "v7"
-Qt_filepath="cfg_noise/v4.Qt.mat"
+Qt_filepath="cfg_noise/collect_results.v7.old.csv"
 suffix_columns = ["eps", "distortion", "clip", "q", "G_k", "G_theta"]
 ## load mg noise configs
 cfg = load_Qt_mat(Qt_filepath, columns=suffix_columns)

@@ -31,9 +31,12 @@ def load_txt(filepath, columns):
 
 # noise realted: load Qt.mat
 def load_Qt_mat(filepath, columns):
-    data = loadmat(filepath)
-    Qt = data['Qt']
-    df = pd.DataFrame(Qt, columns=columns)
+    try:
+        data = loadmat(filepath)
+        Qt = data['Qt']
+        df = pd.DataFrame(Qt, columns=columns)
+    except:
+        df = pd.read_csv(filepath, columns=columns)
     return df
 
 
