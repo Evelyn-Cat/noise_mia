@@ -9,7 +9,6 @@ suffix_dataset=sys.argv[1] # "p100" "fmnist"
 suffix_model=sys.argv[2] # "2f" "lr"
 suffix_epochs=int(sys.argv[3]) # T
 savefolder=sys.argv[4]
-outputfilename=sys.argv[5]
 
 ## set hyperparams [here distortion is also sigma for gaussian noise]
 # parameters in this version
@@ -39,4 +38,4 @@ for prefix_noise_params in cfg.index:
     cfg.loc[int(prefix_noise_params), ["tmia", "mia", "acc"]] = [tmia, accuracy_mia, accuracy_maintask]
 
 print(cfg)
-cfg.to_csv(outputfilename)
+cfg.to_csv("collect_results.v7.csv")
