@@ -88,7 +88,7 @@ true_single_label = np.argmax(tst_y, axis=1)
 accuracy_maintask = accuracy_score(true_single_label, predict_single_label)
 
 # run mia task and return mia task accuracy
-accuracy_mia = mia(model, trn_x, trn_y, tst_x, tst_y)
+accuracy_mia = mia_improved(model, trn_x, trn_y, tst_x, tst_y)
 
 # output main and mia task accuracy
 if prefix_noise_type == "mg":

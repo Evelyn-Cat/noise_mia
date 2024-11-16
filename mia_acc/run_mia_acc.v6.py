@@ -27,7 +27,9 @@ version = "v6"
 Qt_filepath="cfg_noise/v4.Qt.mat"
 suffix_columns = ["eps", "distortion", "clip", "q", "G_k", "G_theta"]
 ## load mg noise configs
-cfg = load_Qt_mat(Qt_filepath, columns=suffix_columns)
+# cfg = load_Qt_mat(Qt_filepath, columns=suffix_columns)
+cfg = pd.read_csv("/home/qin_unix/new_lmo/noise_mia/mia_acc/collect_results.v7.old.csv")
+cfg = cfg[suffix_columns]
 start_time = time.time()
 print("now loading configs: ", time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(start_time)))
 # print(cfg.shape, '\n', cfg)

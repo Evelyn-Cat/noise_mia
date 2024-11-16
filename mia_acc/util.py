@@ -188,9 +188,35 @@ def mia(model, trn_x, trn_y, tst_x, tst_y):
     trn_loss_mean = trn_loss.mean()
     trn_thresh = (trn_preds >= trn_loss_mean).sum()
     tst_thresh = tst_y_len - (tst_preds >= trn_loss_mean).sum()
-    acc = (trn_thresh + tst_thresh) / tst_y_len
+    acc = (trn_thresh + tst_thresh) / tst_y_len + 1
     return np.log(acc)
 
+
+
+def mia_improved(model, trn_x, trn_y, tst_x, tst_y):
+    np.random.seed(0)
+    tst_y_len = tst_y.shape[0]
+    trn_y_inds = np.random.choice(trn_y.shape[0], tst_y_len, replace=False)
+    trn_x, trn_y = trn_x[trn_y_inds], trn_y[trn_y_inds]
+
+    # Get model predictions and compute softmax for probability distribution
+    trn_preds = softmax(model.predict(trn_x), axis=1)
+    tst_preds = softmax(model.predict(tst_x), axis=1)
+
+    # Calculate per-sample cross-entropy loss
+    trn_loss = -np.sum(trn_y * np.log(trn_preds + 1e-10), axis=1)
+    tst_loss = -np.sum(tst_y * np.log(tst_preds + 1e-10), axis=1)
+
+    # Compute the average loss difference (gap) between training and test samples
+    loss_gap = trn_loss.mean() - tst_loss.mean()
+
+    # Calculate an accuracy measure based on whether the training loss is consistently lower
+    trn_correct = (trn_loss < tst_loss.mean()).sum()
+    tst_correct = (tst_loss >= trn_loss.mean()).sum()
+    acc = (trn_correct + tst_correct) / (2 * tst_y_len)  # normalize to [0, 1]
+
+    # Return both loss gap and "membership accuracy" as separate indicators
+    return loss_gap, acc
 
 # task related: CV task relate
 class mia_acc_CV:
